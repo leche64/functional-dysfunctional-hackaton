@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, VT323 } from "next/font/google";
 import "./globals.css";
+import BouncingDVDLogo from "./components/DvD";
 
 const inter = Inter({ subsets: ["latin"] });
 const fontVt323 = VT323({
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={fontVt323.className}>{children}</body>
+      <body className={fontVt323.className}>
+        <BouncingDVDLogo />
+        {children}</body>
     </html>
   );
 }
