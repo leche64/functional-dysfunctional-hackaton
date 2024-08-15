@@ -9,7 +9,7 @@ const MovingButton = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState(false);
     const [moveCountLimit, setMoveCountLImit] = useState(5);
-    const buttonTexts = ["click me", "why you no click me?", "click me you must", "👉👈 .. click me.."]; 
+    const buttonTexts = ["click me", "why you no click me?", "click me you must", "👉👈 .. click me..", "click = zen :p"]; 
     const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
     const [buttonText, setButtonText] = useState(buttonTexts[randomIndex]);
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
@@ -18,7 +18,7 @@ const MovingButton = () => {
     const [poopEmojis, setPoopEmojis] = useState<{ id: number; left: string; top: string; directionX: number; directionY: number }[]>([]);
     const calculateBackgroundColor = () => {
         const darkness = Math.min((timer / maxTime) * 255, 255);
-        const blueColor = 0x4983F6;
+        const blueColor = 0x042940;
         const r = (blueColor >> 16) & 0xff;
         const g = (blueColor >> 8) & 0xff;
         const b = blueColor & 0xff;
@@ -157,7 +157,7 @@ const MovingButton = () => {
         setMoveCount(0);
         setTimer(0);
         setIsTimerStopped(false);
-        setButtonText("Click me");
+        setButtonText("click me");
         setIsRunning(false);
         setIsButtonClicked(false); 
     };

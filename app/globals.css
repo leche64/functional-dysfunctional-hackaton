@@ -5,7 +5,7 @@
 :root {
     --primary-color: #907691;
     --secondary-color: #;
-    --background-color: #f9f8f9;
+    --background-color: #f1c61c;
 }
 
 @keyframes crtAnimation {
@@ -28,7 +28,8 @@
     text-shadow: 0 0 0.5rem;
     padding: 0.5rem;
     border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    background-color: var(--background-color);
+    /* color: var(--background-color); */
     width: 100vw;
     height: 100vh;
 }
