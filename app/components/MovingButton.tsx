@@ -8,8 +8,8 @@ const MovingButton = () => {
     const [timer, setTimer] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState(false);
-    const [moveCountLimit, setMoveCountLImit] = useState(2);
-    const buttonTexts = ["click me", "Why you no click me?", "Click me you must"]; 
+    const [moveCountLimit, setMoveCountLImit] = useState(5);
+    const buttonTexts = ["click me", "why you no click me?", "click me you must", "👉👈 .. click me.."]; 
     const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
     const [buttonText, setButtonText] = useState(buttonTexts[randomIndex]);
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
@@ -182,7 +182,7 @@ const MovingButton = () => {
             {isButtonVisible && (
                 <button
                     className={`px-4 py-2 font-bold text-white bg-blue-500 rounded ${isButtonClicked ? '' : 'hover:bg-blue-700'}`}
-                    style={{ position: 'absolute', ...buttonStyle }}
+                    style={{ position: 'absolute', ...buttonStyle, minWidth: '100px' }} 
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
                     onMouseEnter={() => !isTimerStopped && setIsRunning(true)}
