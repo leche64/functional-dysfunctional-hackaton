@@ -175,8 +175,9 @@ const MovingButton = () => {
     const showResetButton = timer >= maxTime || isTimerStopped; 
 
     return (
-        <div style={{ textAlign: 'center', position: 'relative', height: '50vh', width: '60vh', color: textColor }}>
+        <div style={{ textAlign: 'center', position: 'relative', height: "70vh", width: '60vh', color: textColor }}>
             {/* <h1 style={{ fontSize: '2rem' }}>{moveCount}</h1> */}
+            <h1 style={{ fontSize: '3rem' }}>Zen Click</h1>
             <h1 style={{ fontSize: '2rem' }}>one click away from zen</h1>
             <p style={{ fontSize: '1.5rem' }}>
                 Zen Timer: {formatTime(timer)}
