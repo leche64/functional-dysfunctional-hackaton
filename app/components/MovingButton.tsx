@@ -25,7 +25,7 @@ const MovingButton = () => {
 
         return `rgb(${newR}, ${newG}, ${newB})`;
     };
-    const textColor = 'black'; 
+    const textColor = 'black';
 
     useEffect(() => {
         document.body.style.backgroundColor = calculateBackgroundColor();
@@ -102,7 +102,7 @@ const MovingButton = () => {
     const showResetButton = timer >= maxTime || isTimerStopped;
 
     return (
-        <div style={{ textAlign: 'center', position: 'relative', height: '100vh', color: textColor }}>
+        <div style={{ textAlign: 'center', position: 'relative', height: '50vh', width: '60vh', color: textColor }}>
             <h1 style={{ fontSize: '2rem' }}>{moveCount}</h1>
             <p style={{ fontSize: '1.5rem' }}>
                 Elapsed Time: {formatTime(timer)}
