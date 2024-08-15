@@ -33,7 +33,7 @@ const ZenQuote: React.FC = () => {
     }, []);
 
     return (
-        <div>
+        <div className="pt-[6rem] pl-[6rem] pr-[6rem]">
             {loading ? (
                 <p style={{ fontSize: '1.5rem' }}>
                     Loading...

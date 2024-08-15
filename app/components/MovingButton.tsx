@@ -8,7 +8,7 @@ const MovingButton = () => {
     const [timer, setTimer] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState(false);
-    const [moveCountLimit, setMoveCountLImit] = useState(3);
+    const [moveCountLimit, setMoveCountLImit] = useState(20);
     const [buttonText, setButtonText] = useState("Click me");
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
     const [maxTime, setMaxTime] = useState(10000);
@@ -55,8 +55,14 @@ const MovingButton = () => {
     useEffect(() => {
         const moveRefreshButton = () => {
             if (!isHoveringRefresh) {
-                const randomX = Math.random() * 90; // Adjusted to prevent overflow
-                const randomY = Math.random() * 90; // Adjusted to prevent overflow
+                const buttonWidth = 100; 
+                const buttonHeight = 50; 
+                const containerWidth = 100; 
+                const containerHeight = 100; 
+
+                const randomX = Math.random() * (containerWidth - buttonWidth);
+                const randomY = Math.random() * (containerHeight - buttonHeight);
+                
                 setRefreshButtonStyle({ left: `${randomX}%`, top: `${randomY}%` });
             }
         }; 
