@@ -9,14 +9,16 @@ const BouncingDVDLogo = () => {
   const logoRef = useRef(null);
 
   useEffect(() => {
-    const container = useRef<HTMLInputElement>(containerRef.current);
-    const logo = useRef<HTMLInputElement>(logoRef.current);
+    const container = containerRef.current;
+    const logo = logoRef.current;
     if (!container || !logo) return;
 
     let animationFrameId: number;
 
     const animate = () => {
       setPosition(prevPos => {
+        const container = useRef<HTMLInputElement>(containerRef.current);
+        const logo = useRef<HTMLInputElement>(logoRef.current);
         const containerRect = container?.current?.getBoundingClientRect();
         const logoRect = logo?.current?.getBoundingClientRect();
 
