@@ -1,0 +1,38 @@
+"use client"
+import React, { useEffect, useState } from 'react';
+
+const ZenCount: React.FC = () => {
+    const [count, setCount] = useState<number | null>(null);
+    const [position, setPosition] = useState({ top: 0, right: 0 });
+
+    useEffect(() => {
+        const fetchCount = async () => {
+            const response = await fetch('/api/click', { cache: 'no-store' });
+            const data = await response.json();
+            setCount(data.count);
+        };
+
+        fetchCount();
+        const intervalFetch = setInterval(fetchCount, 30000);
+        const moveText = () => {
+            setPosition({
+                top: Math.random() * (window.innerHeight - 50),
+                left: Math.random() * (window.innerWidth - 100),
+            });
+        };
+
+        const intervalMove = setInterval(moveText, 2000);
+        return () => {
+            clearInterval(intervalFetch);
+            clearInterval(intervalMove);
+        };
+    }, []);
+
+    return (
+        <div style={{ position: 'absolute', top: position.top, left: position.left, fontSize: '48px' }}>
+            {count !== null ? count : "loading zen counter.."}
+        </div>
+    );
+};
+
+export default ZenCount;
