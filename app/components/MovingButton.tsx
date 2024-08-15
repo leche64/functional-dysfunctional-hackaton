@@ -98,14 +98,16 @@ const MovingButton = () => {
         setIsTimerStopped(true);
         setButtonText("oh sh!t you clicked it..");
 
-        const explosionCount = 169; 
+        const explosionCount = 269; 
+        const centerX = window.innerWidth / 2; 
+        const centerY = window.innerHeight / 2; 
         const newEmojis = Array.from({ length: explosionCount }, (_, index) => {
             const angle = Math.random() * 2 * Math.PI; 
             const speed = Math.random() * 2 + 2; 
             return {
                 id: index,
-                left: `${e.clientX}px`, 
-                top: `${e.clientY}px`,   
+                left: `${centerX}px`,  
+                top: `${centerY}px`,   
                 directionX: Math.cos(angle) * speed, 
                 directionY: Math.sin(angle) * speed, 
             };
@@ -119,7 +121,7 @@ const MovingButton = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ timer }), 
+                body: JSON.stringify({ timer }), // Pass the timer value
             });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
