@@ -62,7 +62,8 @@ const MovingButton = () => {
 
         const interval = setInterval(moveRefreshButton, 1700);
         return () => clearInterval(interval);
-    }, [isHoveringRefresh]); // Keep this dependency to stop moving when hovered
+    }, []); // Keep this dependency to stop moving when hovered
+    // }, [isHoveringRefresh]); // Keep this dependency to stop moving when hovered
 
     const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (moveCount >= moveCountLimit || isTimerStopped) return;
