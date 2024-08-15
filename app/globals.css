@@ -30,6 +30,6 @@
     border: 2px solid var(--primary-color);
     background-color: var(--background-color);
     /* color: var(--background-color); */
-    width: 100vw;
-    height: 100vh;
+    width: full;
+    height: full;
 }
