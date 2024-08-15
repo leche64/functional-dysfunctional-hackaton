@@ -12,6 +12,7 @@ const MovingButton = () => {
     const [buttonText, setButtonText] = useState("Click me");
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
     const [maxTime, setMaxTime] = useState(10000);
+    const [isButtonClicked, setIsButtonClicked] = useState(false); // New state for button click status
     const calculateBackgroundColor = () => {
         const darkness = Math.min((timer / maxTime) * 255, 255);
         const blueColor = 0x4983F6;
@@ -83,10 +84,13 @@ const MovingButton = () => {
         setMoveCount(prevCount => prevCount + 1);
     };
 
+    
     const handleClick = async () => {
+        if (isButtonClicked) return; // Prevent further clicks if already clicked
+        setIsButtonClicked(true); // Set button as clicked
         setIsRunning(false);
         setIsTimerStopped(true);
-        setButtonText("oh sh!t you clicked me..");
+        setButtonText("oh sh!t you clicked it..");
 
         // New code to call the API
         try {
@@ -111,6 +115,7 @@ const MovingButton = () => {
         setIsTimerStopped(false);
         setButtonText("Click me");
         setIsRunning(false);
+        setIsButtonClicked(false); // Reset button click status
     };
 
     const formatTime = (time: number) => {
@@ -132,11 +137,12 @@ const MovingButton = () => {
             </p>
             {isButtonVisible && (
                 <button
-                    className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                    className={`px-4 py-2 font-bold text-white bg-blue-500 rounded ${isButtonClicked ? '' : 'hover:bg-blue-700'}`}
                     style={{ position: 'absolute', ...buttonStyle }}
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
                     onMouseEnter={() => !isTimerStopped && setIsRunning(true)}
+                    disabled={isButtonClicked} // Disable button if clicked
                 >
                     {buttonText}
                 </button>
