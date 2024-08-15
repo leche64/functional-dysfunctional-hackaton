@@ -98,19 +98,35 @@ const MovingButton = () => {
         setIsTimerStopped(true);
         setButtonText("oh sh!t you clicked it..");
 
-        const explosionCount = 100; 
+        const explosionCount = 169; 
         const newEmojis = Array.from({ length: explosionCount }, (_, index) => {
             const angle = Math.random() * 2 * Math.PI; 
             const speed = Math.random() * 2 + 2; 
             return {
                 id: index,
                 left: `${e.clientX}px`, 
-                top: `${e.clientY}px`,
+                top: `${e.clientY}px`,   
                 directionX: Math.cos(angle) * speed, 
                 directionY: Math.sin(angle) * speed, 
             };
         });
         setPoopEmojis(newEmojis);
+
+        // db
+        try {
+            const response = await fetch('/api/click', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ timer }), 
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+        } catch (error) {
+            console.error('Error calling /api/click:', error);
+        }
     };
 
     useEffect(() => {
