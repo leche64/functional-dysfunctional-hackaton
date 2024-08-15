@@ -15,10 +15,11 @@ const ZenCount: React.FC = () => {
         fetchCount();
         const intervalFetch = setInterval(fetchCount, 30000);
         const moveText = () => {
-            setPosition({
+            setPosition((prevPosition) => ({
+                ...prevPosition,
                 top: Math.random() * (window.innerHeight - 50),
-                left: Math.random() * (window.innerWidth - 100),
-            });
+                right: Math.random() * (window.innerWidth - 100),
+            }));
         };
 
         const intervalMove = setInterval(moveText, 2000);
@@ -27,9 +28,8 @@ const ZenCount: React.FC = () => {
             clearInterval(intervalMove);
         };
     }, []);
-
     return (
-        <div style={{ position: 'absolute', top: position.top, left: position.left, fontSize: '48px' }}>
+        <div style={{ position: 'absolute', top: position.top, right: position.right, fontSize: '48px' }}>
             {count !== null ? count : "loading zen counter.."}
         </div>
     );

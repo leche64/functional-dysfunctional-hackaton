@@ -9,35 +9,35 @@ const BouncingDVDLogo = () => {
   const logoRef = useRef(null);
 
   useEffect(() => {
-    const container = containerRef.current;
-    const logo = logoRef.current;
+    const container = useRef<HTMLInputElement>(containerRef.current);
+    const logo = useRef<HTMLInputElement>(logoRef.current);
     if (!container || !logo) return;
 
     let animationFrameId: number;
 
     const animate = () => {
       setPosition(prevPos => {
-        const containerRect = container.getBoundingClientRect();
-        const logoRect = logo.getBoundingClientRect();
+        const containerRect = container?.current?.getBoundingClientRect();
+        const logoRect = logo?.current?.getBoundingClientRect();
 
         let newX = prevPos.x + velocity.x;
         let newY = prevPos.y + velocity.y;
         let newVelocityX = velocity.x;
         let newVelocityY = velocity.y;
 
-        if (newX <= 0 || newX + logoRect.width >= containerRect.width) {
+        if (newX <= 0 || newX + (logoRect?.width ?? 0) >= (containerRect?.width ?? 0)) {
           newVelocityX = -velocity.x;
         }
 
-        if (newY <= 0 || newY + logoRect.height >= containerRect.height) {
+        if (newY <= 0 || newY + (logoRect?.height ?? 0) >= (containerRect?.height ?? 0)) {
           newVelocityY = -velocity.y;
         }
 
         setVelocity({ x: newVelocityX, y: newVelocityY });
 
         return {
-          x: Math.max(0, Math.min(newX, containerRect.width - logoRect.width)),
-          y: Math.max(0, Math.min(newY, containerRect.height - logoRect.height))
+          x: Math.max(0, Math.min(newX, (containerRect?.width ?? 0) - (logoRect?.width ?? 0))),
+          y: Math.max(0, Math.min(newY, (containerRect?.height ?? 0) - (logoRect?.height ?? 0)))
         };
       });
 
