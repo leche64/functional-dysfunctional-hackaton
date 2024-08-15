@@ -11,7 +11,7 @@ const MovingButton = () => {
     const [moveCountLimit, setMoveCountLImit] = useState(3);
     const [buttonText, setButtonText] = useState("Click me");
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
-    const [maxTime, setMaxTime] = useState(60000);
+    const [maxTime, setMaxTime] = useState(10000);
     const calculateBackgroundColor = () => {
         const darkness = Math.min((timer / maxTime) * 255, 255);
         const blueColor = 0x4983F6;
@@ -39,24 +39,30 @@ const MovingButton = () => {
         let interval: NodeJS.Timeout;
         if (isRunning && timer < 60000) {
             interval = setInterval(() => {
-                setTimer(prevTimer => prevTimer + 10);
+                setTimer(prevTimer => {
+                    if (prevTimer + 10 >= maxTime) {
+                        setIsRunning(false); // Stop the timer when maxTime is reached
+                        return maxTime; // Ensure timer does not exceed maxTime
+                    }
+                    return prevTimer + 10;
+                });
             }, 10);
         }
         return () => clearInterval(interval);
-    }, [isRunning, timer]);
+    }, [isRunning, timer, maxTime]);
 
     useEffect(() => {
         const moveRefreshButton = () => {
             if (!isHoveringRefresh) {
-                const randomX = Math.random() * 100;
-                const randomY = Math.random() * 100;
+                const randomX = Math.random() * 90; // Adjusted to prevent overflow
+                const randomY = Math.random() * 90; // Adjusted to prevent overflow
                 setRefreshButtonStyle({ left: `${randomX}%`, top: `${randomY}%` });
             }
         };
 
-        const interval = setInterval(moveRefreshButton, 2500);
+        const interval = setInterval(moveRefreshButton, 1700);
         return () => clearInterval(interval);
-    }, [isTimerStopped, isHoveringRefresh]);
+    }, [isHoveringRefresh]); // Keep this dependency to stop moving when hovered
 
     const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (moveCount >= moveCountLimit || isTimerStopped) return;
@@ -98,8 +104,8 @@ const MovingButton = () => {
         return `${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
     };
 
-    const isButtonVisible = timer < maxTime;
-    const showResetButton = timer >= maxTime || isTimerStopped;
+    const isButtonVisible = timer < maxTime; // Keep the original condition
+    const showResetButton = timer >= maxTime || isTimerStopped; // Ensure reset button shows when maxTime is reached
 
     return (
         <div style={{ textAlign: 'center', position: 'relative', height: '50vh', width: '60vh', color: textColor }}>
@@ -121,7 +127,7 @@ const MovingButton = () => {
             {showResetButton && (
                 <button
                     className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                    style={{ position: 'absolute', ...refreshButtonStyle }}
+                    style={{ position: 'absolute', ...refreshButtonStyle }} // Ensure it moves
                     onClick={handleRefresh}
                     onMouseEnter={() => setIsHoveringRefresh(true)}
                     onMouseLeave={() => setIsHoveringRefresh(false)}
