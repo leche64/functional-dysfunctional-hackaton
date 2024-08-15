@@ -9,7 +9,7 @@ const ZenQuote: React.FC = () => {
     useEffect(() => {
         const fetchQuote = async (): Promise<void> => {
             setLoading(true);
-            const response = await fetch('/api/zenquote',{
+            const response = await fetch('/api/zenquote', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,11 +32,13 @@ const ZenQuote: React.FC = () => {
     return (
         <div>
             {loading ? (
-                <h1>Loading...</h1>
+                <p style={{ fontSize: '1.5rem' }}>
+                    Loading...
+                </p>
             ) : (
                 <>
-                    <h1>{quote}</h1>
-                    <p>- {author}</p>
+                    <p style={{ fontSize: '1.5rem' }}>{quote}</p>
+                    <p style={{ fontSize: '1.0rem', fontStyle: 'italic' }}>- {author}</p>
                 </>
             )}
         </div>
