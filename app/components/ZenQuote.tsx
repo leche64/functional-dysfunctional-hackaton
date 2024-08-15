@@ -19,13 +19,16 @@ const ZenQuote: React.FC = () => {
             const data = await response.json();
             setQuote(data[0].q);
             setAuthor(data[0].a);
-            await new Promise(resolve => setTimeout(resolve, 800));
+            // Generate a random wait time between 300ms (0.3s) and 1000ms (1s)
+            const randomDelay = Math.random() * (1000 - 300) + 300;
+            await new Promise(resolve => setTimeout(resolve, randomDelay));
             setLoading(false);
         };
 
         fetchQuote();
 
-        const intervalId = setInterval(fetchQuote, 10000);
+        const intervalId = setInterval(() => {
+        }, Math.random() * (20000 - 8000) + 8000);
         return () => clearInterval(intervalId);
     }, []);
 
