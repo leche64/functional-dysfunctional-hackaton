@@ -9,7 +9,9 @@ const MovingButton = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState(false);
     const [moveCountLimit, setMoveCountLImit] = useState(2);
-    const [buttonText, setButtonText] = useState("Click me");
+    const buttonTexts = ["click me", "Why you no click me?", "Click me you must"]; 
+    const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
+    const [buttonText, setButtonText] = useState(buttonTexts[randomIndex]);
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
     const [maxTime, setMaxTime] = useState(10000);
     const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -87,6 +89,10 @@ const MovingButton = () => {
             top: `${50 + (offsetY / distance) * moveDistance}%`,
         });
 
+        // Rotate button text on mouse move
+        const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
+        setButtonText(buttonTexts[randomIndex]); // Update button text randomly
+
         setMoveCount(prevCount => prevCount + 1);
     };
 
@@ -96,7 +102,8 @@ const MovingButton = () => {
         setIsButtonClicked(true); 
         setIsRunning(false);
         setIsTimerStopped(true);
-        setButtonText("oh sh!t you clicked it..");
+        const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
+        setButtonText(buttonTexts[randomIndex]); // Update button text randomly
 
         const explosionCount = 269; 
         const centerX = window.innerWidth / 2; 

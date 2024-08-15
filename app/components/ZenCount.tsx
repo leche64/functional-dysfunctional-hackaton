@@ -29,8 +29,8 @@ const ZenCount: React.FC = () => {
         };
     }, []);
     return (
-        <div style={{ position: 'absolute', top: position.top, right: position.right, fontSize: '48px' }}>
-            {count !== null ? count : "loading zen counter.."}
+        <div style={{ position: 'absolute', top: position.top, right: position.right, fontSize: '24px' }}>
+            {count !== null ? "Total Zen Achieved: " + count : "loading zen counter.."}
         </div>
     );
 };
