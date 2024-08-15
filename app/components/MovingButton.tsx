@@ -102,8 +102,9 @@ const MovingButton = () => {
         setIsButtonClicked(true); 
         setIsRunning(false);
         setIsTimerStopped(true);
-        const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
-        setButtonText(buttonTexts[randomIndex]); // Update button text randomly
+        // const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
+        // setButtonText(buttonTexts[randomIndex]); 
+        setButtonText("..oh sh!t you clicked it..");
 
         const explosionCount = 269; 
         const centerX = window.innerWidth / 2; 
@@ -157,7 +158,7 @@ const MovingButton = () => {
         setMoveCount(0);
         setTimer(0);
         setIsTimerStopped(false);
-        setButtonText("..oh sh!t you clicked it..");
+        setButtonText("click me");
         setIsRunning(false);
         setIsButtonClicked(false); 
     };
