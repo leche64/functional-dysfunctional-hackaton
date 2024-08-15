@@ -83,10 +83,26 @@ const MovingButton = () => {
         setMoveCount(prevCount => prevCount + 1);
     };
 
-    const handleClick = () => {
+    const handleClick = async () => {
         setIsRunning(false);
         setIsTimerStopped(true);
         setButtonText("oh sh!t you clicked me..");
+
+        // New code to call the API
+        try {
+            const response = await fetch('/api/click', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ timer }), // Pass the timer value
+            });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+        } catch (error) {
+            console.error('Error calling /api/click:', error);
+        }
     };
 
     const handleRefresh = () => {
