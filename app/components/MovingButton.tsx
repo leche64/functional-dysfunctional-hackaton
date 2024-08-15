@@ -58,7 +58,7 @@ const MovingButton = () => {
                 const randomY = Math.random() * 90; // Adjusted to prevent overflow
                 setRefreshButtonStyle({ left: `${randomX}%`, top: `${randomY}%` });
             }
-        };
+        }; 
 
         const interval = setInterval(moveRefreshButton, 1700);
         return () => clearInterval(interval);
