@@ -157,7 +157,7 @@ const MovingButton = () => {
         setMoveCount(0);
         setTimer(0);
         setIsTimerStopped(false);
-        setButtonText("click me");
+        setButtonText("..oh sh!t you clicked it..");
         setIsRunning(false);
         setIsButtonClicked(false); 
     };
