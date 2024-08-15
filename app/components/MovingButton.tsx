@@ -98,7 +98,8 @@ const MovingButton = () => {
         return `${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
     };
 
-    const isButtonVisible = timer < maxTime; // Update this line
+    const isButtonVisible = timer < maxTime;
+    const showResetButton = timer >= maxTime || isTimerStopped;
 
     return (
         <div style={{ textAlign: 'center', position: 'relative', height: '100vh', color: textColor }}>
@@ -117,7 +118,7 @@ const MovingButton = () => {
                     {buttonText}
                 </button>
             )}
-            {isTimerStopped && (
+            {showResetButton && (
                 <button
                     className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
                     style={{ position: 'absolute', ...refreshButtonStyle }}
