@@ -8,12 +8,12 @@ const MovingButton = () => {
     const [timer, setTimer] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState(false);
-    const [moveCountLimit, setMoveCountLImit] = useState(18);
+    const [moveCountLimit, setMoveCountLImit] = useState(25);
     const buttonTexts = ["click me", "why you no click me?", "click me you must", "👉👈 .. click me..", "click = zen :p"]; 
     const randomIndex = Math.floor(Math.random() * buttonTexts.length); // Select a random index
     const [buttonText, setButtonText] = useState(buttonTexts[randomIndex]);
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
-    const [maxTime, setMaxTime] = useState(10000);
+    const [maxTime, setMaxTime] = useState(69000);
     const [isButtonClicked, setIsButtonClicked] = useState(false);
     const [poopEmojis, setPoopEmojis] = useState<{ id: number; left: string; top: string; directionX: number; directionY: number }[]>([]);
     const calculateBackgroundColor = () => {
