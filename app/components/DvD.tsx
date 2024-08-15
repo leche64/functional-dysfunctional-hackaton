@@ -5,10 +5,8 @@ const BouncingDVDLogo = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [velocity, setVelocity] = useState({ x: 0.08, y: 0.08 }); 
   const [color, setColor] = useState(getRandomColor());
-  const containerRef = useRef(null);
-  const logoRef = useRef(null);
-  const container = useRef<HTMLDivElement>(null); // Create new refs
-  const logo = useRef<HTMLDivElement>(null); // Create new refs
+  const containerRef = useRef<HTMLDivElement>(null); // Keep this ref
+  const logoRef = useRef<HTMLDivElement>(null); // Keep this ref
   useEffect(() => {
     if (!containerRef.current || !logoRef.current) return;
 
@@ -16,8 +14,8 @@ const BouncingDVDLogo = () => {
 
     const animate = () => {
       setPosition(prevPos => {
-        const containerRect = container.current?.getBoundingClientRect(); // Use the new ref with optional chaining
-        const logoRect = logo.current?.getBoundingClientRect(); // Use the new ref with optional chaining
+        const containerRect = containerRef.current?.getBoundingClientRect(); // Use containerRef
+        const logoRect = logoRef.current?.getBoundingClientRect(); // Use logoRef
 
         let newX = prevPos.x + velocity.x;
         let newY = prevPos.y + velocity.y;
