@@ -3,24 +3,40 @@ import { useState, useEffect } from "react";
 
 const MovingButton = () => {
   const [buttonStyle, setButtonStyle] = useState({ left: '50%', top: '50%' });
+  const [refreshButtonStyle, setRefreshButtonStyle] = useState({ left: '50%', top: '50%' });
   const [moveCount, setMoveCount] = useState(0);
   const [timer, setTimer] = useState(0); 
   const [isRunning, setIsRunning] = useState(false);
   const [isTimerStopped, setIsTimerStopped] = useState(false); 
-  const [moveCountLimit, setMoveCountLImit] = useState(69);
+  const [moveCountLimit, setMoveCountLImit] = useState(3);
+  const [buttonText, setButtonText] = useState("Click me");
+  const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isRunning) {
       interval = setInterval(() => {
-        setTimer(prevTimer => prevTimer + 10); // Increment by 10 milliseconds for higher precision
+        setTimer(prevTimer => prevTimer + 10);
       }, 10);
     }
     return () => clearInterval(interval);
   }, [isRunning]);
 
+  useEffect(() => {
+    const moveRefreshButton = () => {
+      if (!isHoveringRefresh) {
+        const randomX = Math.random() * 100;
+        const randomY = Math.random() * 100;
+        setRefreshButtonStyle({ left: `${randomX}%`, top: `${randomY}%` });
+      }
+    };
+
+    const interval = setInterval(moveRefreshButton, 2500); // Increased from 1000 to 2000 ms
+    return () => clearInterval(interval);
+  }, [isTimerStopped, isHoveringRefresh]);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (moveCount >= moveCountLimit || isTimerStopped) return; // Stop moving after 5 times or if timer is stopped
+    if (moveCount >= moveCountLimit || isTimerStopped) return;
 
     const button = e.currentTarget;
     const buttonRect = button.getBoundingClientRect();
@@ -38,8 +54,17 @@ const MovingButton = () => {
   };
 
   const handleClick = () => {
-    setIsRunning(false); // Stop the timer when the button is clicked
-    setIsTimerStopped(true); // Mark the timer as stopped
+    setIsRunning(false);
+    setIsTimerStopped(true);
+    setButtonText("oh sh!t you clicked me..");
+  };
+
+  const handleRefresh = () => {
+    setMoveCount(0);
+    setTimer(0);
+    setIsTimerStopped(false);
+    setButtonText("Click me");
+    setIsRunning(false);
   };
 
   const formatTime = (time: number) => {
@@ -51,20 +76,31 @@ const MovingButton = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', position: 'relative', height: '100vh' }}>
       <h1 style={{ fontSize: '2rem' }}>{moveCount}</h1>
       <p style={{ fontSize: '1.5rem' }}>
-        Elapsed Time: {formatTime(timer)} {/* Display formatted timer */}
+        Elapsed Time: {formatTime(timer)}
       </p>
       <button 
         className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" 
         style={{ position: 'absolute', ...buttonStyle }}
         onMouseMove={handleMouseMove}
         onClick={handleClick}
-        onMouseEnter={() => !isTimerStopped && setIsRunning(true)} // Start the timer only if it hasn't been stopped
+        onMouseEnter={() => !isTimerStopped && setIsRunning(true)}
       >
-        Click me
+        {buttonText}
       </button>
+      {isTimerStopped && (
+        <button 
+          className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700" 
+          style={{ position: 'absolute', ...refreshButtonStyle }}
+          onClick={handleRefresh}
+          onMouseEnter={() => setIsHoveringRefresh(true)}
+          onMouseLeave={() => setIsHoveringRefresh(false)}
+        >
+          Reset
+        </button>
+      )}
     </div>
   );
 };
