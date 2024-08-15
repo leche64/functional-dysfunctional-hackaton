@@ -8,11 +8,12 @@ const MovingButton = () => {
     const [timer, setTimer] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState(false);
-    const [moveCountLimit, setMoveCountLImit] = useState(20);
+    const [moveCountLimit, setMoveCountLImit] = useState(2);
     const [buttonText, setButtonText] = useState("Click me");
     const [isHoveringRefresh, setIsHoveringRefresh] = useState(false);
     const [maxTime, setMaxTime] = useState(10000);
-    const [isButtonClicked, setIsButtonClicked] = useState(false); // New state for button click status
+    const [isButtonClicked, setIsButtonClicked] = useState(false);
+    const [poopEmojis, setPoopEmojis] = useState<{ id: number; left: string; top: string; directionX: number; directionY: number }[]>([]);
     const calculateBackgroundColor = () => {
         const darkness = Math.min((timer / maxTime) * 255, 255);
         const blueColor = 0x4983F6;
@@ -42,8 +43,8 @@ const MovingButton = () => {
             interval = setInterval(() => {
                 setTimer(prevTimer => {
                     if (prevTimer + 10 >= maxTime) {
-                        setIsRunning(false); // Stop the timer when maxTime is reached
-                        return maxTime; // Ensure timer does not exceed maxTime
+                        setIsRunning(false); 
+                        return maxTime; 
                     }
                     return prevTimer + 10;
                 });
@@ -69,8 +70,7 @@ const MovingButton = () => {
 
         const interval = setInterval(moveRefreshButton, 1700);
         return () => clearInterval(interval);
-    }, []); // Keep this dependency to stop moving when hovered
-    // }, [isHoveringRefresh]); // Keep this dependency to stop moving when hovered
+    }, []);
 
     const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
         if (moveCount >= moveCountLimit || isTimerStopped) return;
@@ -91,29 +91,42 @@ const MovingButton = () => {
     };
 
     
-    const handleClick = async () => {
-        if (isButtonClicked) return; // Prevent further clicks if already clicked
-        setIsButtonClicked(true); // Set button as clicked
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (isButtonClicked) return; 
+        setIsButtonClicked(true); 
         setIsRunning(false);
         setIsTimerStopped(true);
         setButtonText("oh sh!t you clicked it..");
 
-        // New code to call the API
-        try {
-            const response = await fetch('/api/click', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ timer }), // Pass the timer value
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-        } catch (error) {
-            console.error('Error calling /api/click:', error);
-        }
+        const explosionCount = 100; 
+        const newEmojis = Array.from({ length: explosionCount }, (_, index) => {
+            const angle = Math.random() * 2 * Math.PI; 
+            const speed = Math.random() * 2 + 2; 
+            return {
+                id: index,
+                left: `${e.clientX}px`, 
+                top: `${e.clientY}px`,
+                directionX: Math.cos(angle) * speed, 
+                directionY: Math.sin(angle) * speed, 
+            };
+        });
+        setPoopEmojis(newEmojis);
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setPoopEmojis(prevEmojis => 
+                prevEmojis.map(emoji => ({
+                    ...emoji,
+                    left: `${parseFloat(emoji.left) + emoji.directionX}px`, 
+                    top: `${parseFloat(emoji.top) + emoji.directionY}px`, 
+                })).filter(emoji => 
+                    parseFloat(emoji.top) < window.innerHeight && parseFloat(emoji.left) < window.innerWidth 
+                )
+            );
+        }, 100);
+        return () => clearInterval(interval);
+    }, [poopEmojis]);
 
     const handleRefresh = () => {
         setMoveCount(0);
@@ -121,7 +134,7 @@ const MovingButton = () => {
         setIsTimerStopped(false);
         setButtonText("Click me");
         setIsRunning(false);
-        setIsButtonClicked(false); // Reset button click status
+        setIsButtonClicked(false); 
     };
 
     const formatTime = (time: number) => {
@@ -132,8 +145,8 @@ const MovingButton = () => {
         return `${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
     };
 
-    const isButtonVisible = timer < maxTime; // Keep the original condition
-    const showResetButton = timer >= maxTime || isTimerStopped; // Ensure reset button shows when maxTime is reached
+    const isButtonVisible = timer < maxTime; 
+    const showResetButton = timer >= maxTime || isTimerStopped; 
 
     return (
         <div style={{ textAlign: 'center', position: 'relative', height: '50vh', width: '60vh', color: textColor }}>
@@ -148,7 +161,7 @@ const MovingButton = () => {
                     onMouseMove={handleMouseMove}
                     onClick={handleClick}
                     onMouseEnter={() => !isTimerStopped && setIsRunning(true)}
-                    disabled={isButtonClicked} // Disable button if clicked
+                    disabled={isButtonClicked} 
                 >
                     {buttonText}
                 </button>
@@ -156,7 +169,7 @@ const MovingButton = () => {
             {showResetButton && (
                 <button
                     className="px-4 py-2 font-bold text-white bg-red-500 rounded hover:bg-red-700"
-                    style={{ position: 'absolute', ...refreshButtonStyle }} // Ensure it moves
+                    style={{ position: 'absolute', ...refreshButtonStyle }} 
                     onClick={handleRefresh}
                     onMouseEnter={() => setIsHoveringRefresh(true)}
                     onMouseLeave={() => setIsHoveringRefresh(false)}
@@ -164,6 +177,11 @@ const MovingButton = () => {
                     Reset
                 </button>
             )}
+            {poopEmojis.map(emoji => (
+                <div key={emoji.id} style={{ position: 'absolute', left: emoji.left, top: emoji.top, fontSize: '2rem' }}>
+                    💩
+                </div>
+            ))}
         </div>
     );
 };
