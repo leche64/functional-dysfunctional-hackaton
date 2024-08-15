@@ -18,7 +18,7 @@ const MovingButton = () => {
     const [poopEmojis, setPoopEmojis] = useState<{ id: number; left: string; top: string; directionX: number; directionY: number }[]>([]);
     const calculateBackgroundColor = () => {
         const darkness = Math.min((timer / maxTime) * 255, 255);
-        const blueColor = 0x042940;
+        const blueColor = 0x4983F6;
         const r = (blueColor >> 16) & 0xff;
         const g = (blueColor >> 8) & 0xff;
         const b = blueColor & 0xff;
