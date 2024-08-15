@@ -11,6 +11,7 @@ export default function Home() {
       <ZenCount />
       <CursorEffect/>
       <ZenQuote />
+      <div className="loader"></div>
       <MovingButton />
     </main>
   );

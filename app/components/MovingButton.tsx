@@ -183,6 +183,7 @@ const MovingButton = () => {
                 Zen Timer: {formatTime(timer)}
             </p>
             {isButtonVisible && (
+                
                 <button
                     className={`px-4 py-2 font-bold text-white bg-blue-500 rounded ${isButtonClicked ? '' : 'hover:bg-blue-700'}`}
                     style={{ position: 'absolute', ...buttonStyle, minWidth: '100px' }} 
