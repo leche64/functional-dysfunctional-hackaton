@@ -19,6 +19,7 @@ const ZenQuote: React.FC = () => {
             const data = await response.json();
             setQuote(data[0].q);
             setAuthor(data[0].a);
+            await new Promise(resolve => setTimeout(resolve, 800));
             setLoading(false);
         };
 
