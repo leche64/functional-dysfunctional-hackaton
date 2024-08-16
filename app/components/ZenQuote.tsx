@@ -25,8 +25,7 @@ const ZenQuote: React.FC = () => {
 
         fetchQuote();
 
-        const intervalId = setInterval(() => {
-        }, Math.random() * (20000 - 8000) + 8000);
+        const intervalId = setInterval(fetchQuote, 30000);
         return () => clearInterval(intervalId);
     }, []);
 
