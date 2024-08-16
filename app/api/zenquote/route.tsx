@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req: Request): Promise<Response> {
     try {
+        console.log("getting new quote..")
         const apiUrl =
             "https://zenquotes.io/api/random";
 
