@@ -13,7 +13,7 @@ export async function GET(req: Request) {
                 expires: "0",
                 cache: "no-store",
                 cacheControl: "no-cache",
-            },
+            }, 
         });
 
         if (!response.ok) {
