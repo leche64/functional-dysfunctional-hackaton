@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+- tldr
+app that helps users achieve zen and less distractions by introducing a large number of.. distractions
+
+demo: https://zen-click.vercel.app/
+
+- about 
+zen is just one click away.. but users must click a button that moves away from their cursor. if users click that button, they can reset the game, but the reset button also moves.. 
 
 ## Getting Started
 
