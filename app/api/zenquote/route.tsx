@@ -1,16 +1,15 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(req: Request): Promise<Response> {
+export async function GET(req: Request) {
     try {
         console.log("getting new quote..", new Date().toLocaleString());
-        const apiUrl =
-            "https://zenquotes.io/api/random";
+        const apiUrl = "https://zenquotes.io/api/random";
 
         const response = await fetch(apiUrl, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Cache-Control": "no-cache, no-store, must-revalidate, ",
+                "Cache-Control": "no-cache, no-store, must-revalidate",
                 pragma: "no-cache",
                 expires: "0",
             },
@@ -21,11 +20,13 @@ export async function GET(req: Request): Promise<Response> {
         }
 
         const data = await response.json();
-        const severResponse = NextResponse.json(data)
-        response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        response.headers.set('Pragma', 'no-cache');
-        response.headers.set('Expires', '0');
-        return severResponse
+        const severResponse = NextResponse.json(data);
+        severResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        severResponse.headers.set('Pragma', 'no-cache');
+        severResponse.headers.set('Expires', '0');
+
+        console.log(data[0].q);
+        return severResponse;
     } catch (error) {
         return new Response("Internal Server Error", { status: 500 });
     }
