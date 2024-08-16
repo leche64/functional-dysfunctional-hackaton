@@ -12,6 +12,7 @@ export async function GET(req: Request) {
                 "Cache-Control": "no-cache, no-store, must-revalidate",
                 pragma: "no-cache",
                 expires: "0",
+                cache: "no-store",
             },
         });
 
@@ -25,6 +26,7 @@ export async function GET(req: Request) {
         severResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         severResponse.headers.set('Pragma', 'no-cache');
         severResponse.headers.set('Expires', '0');
+        severResponse.headers.set('Cache', 'no-store');
 
         return severResponse;
     } catch (error) {
