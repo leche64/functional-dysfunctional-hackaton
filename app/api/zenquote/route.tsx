@@ -21,7 +21,9 @@ export async function GET(req: Request) {
         }
 
         const data = await response.json();
-        const randomObject = data[Math.floor(Math.random() * data.length)];
+        const randomNum = Math.floor(Math.random() * data.length);
+        const randomObject = data[randomNum];
+        console.log("random object", randomNum,randomObject);
         const severResponse = NextResponse.json(randomObject);
         severResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         severResponse.headers.set('Pragma', 'no-cache');
