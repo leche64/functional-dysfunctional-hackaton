@@ -10,6 +10,9 @@ export async function GET(req: Request): Promise<Response> {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                pragma: "no-cache",
+                expires: "0",
             },
         });
 
@@ -18,7 +21,6 @@ export async function GET(req: Request): Promise<Response> {
         }
 
         const data = await response.json();
-        const jsonString = JSON.stringify(data);
         const severResponse = NextResponse.json(data)
         response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         response.headers.set('Pragma', 'no-cache');
