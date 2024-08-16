@@ -1,7 +1,8 @@
 ## tldr
 app that helps users achieve zen and less distractions by introducing a large number of.. distractions
 
-## demo: [https://zen-click.vercel.app/](https://zen-click.vercel.app/) 
+## demo 
+[https://zen-click.vercel.app/](https://zen-click.vercel.app/) 
 
 ## about 
 zen is just one click away.. but users must click a button that moves away from their cursor. if users click that button, they can reset the game, but the reset button also moves.. inspirational quotes appear to keep you focused.. click the button to get zen.
