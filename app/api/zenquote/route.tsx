@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req: Request): Promise<Response> {
     try {
-        console.log("getting new quote..")
+        console.log("getting new quote..", new Date().toLocaleString());
         const apiUrl =
             "https://zenquotes.io/api/random";
 
@@ -10,7 +10,7 @@ export async function GET(req: Request): Promise<Response> {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Cache-Control": "no-cache, no-store, must-revalidate, proxy-revalidate",
+                "Cache-Control": "no-cache, no-store, must-revalidate, ",
                 pragma: "no-cache",
                 expires: "0",
             },
