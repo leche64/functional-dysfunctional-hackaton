@@ -1,14 +1,20 @@
-## tldr
-app that helps users achieve zen and less distractions by introducing a large number of.. distractions
+## TLDR
+App that helps users achieve zen and less distractions by introducing a large number of.. distractions.. just click the button..
 
-## demo 
+## Demo 
 [https://zen-click.vercel.app/](https://zen-click.vercel.app/) 
 
-## about 
-zen is just one click away.. but users must click a button that moves away from their cursor. if users click that button, they can reset the game, but the reset button also moves.. inspirational quotes appear to keep you focused.. click the button to get zen.
+## About 
+life is though, too many distractions.. but zen is just one click away.. zen click helps you avoid distractions FAST with just ONE click..
+
+## Features
+- button moves away from users cursor 
+- random inspirational quotes 
+- pop emojis trailing cursor 
+- pop explosion on click
+
 
 ## Getting Started
-
 First, run the development server:
 
 ```bash
