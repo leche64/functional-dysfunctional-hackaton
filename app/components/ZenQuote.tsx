@@ -2,8 +2,6 @@
 import { unstable_noStore } from 'next/cache';
 import React, { useEffect, useState } from 'react';
 
-export const dynamic = 'force-dynamic';
-
 const ZenQuote: React.FC = () => {
     const [quote, setQuote] = useState<string>('');
     const [author, setAuthor] = useState<string>('');
