@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Zen Click",
   description: "One click away from zen",
 };
-
+export const fetchCache = 'force-no-store'
 export default function RootLayout({
   children,
 }: Readonly<{
