@@ -10,9 +10,7 @@ const ZenQuote: React.FC = () => {
         const fetchQuote = async (): Promise<void> => {
             setLoading(true);
             const response = await fetch('/api/zenquote', {
-                method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
                     cache: 'no-store',
                 },
             });
