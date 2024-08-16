@@ -9,10 +9,10 @@ export async function GET(req: Request) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Cache-Control": "no-cache, no-store, must-revalidate",
                 pragma: "no-cache",
                 expires: "0",
                 cache: "no-store",
+                cacheControl: "no-cache",
             },
         });
 
