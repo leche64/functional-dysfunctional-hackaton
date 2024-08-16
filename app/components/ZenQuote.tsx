@@ -13,8 +13,8 @@ const ZenQuote: React.FC = () => {
                 cache: 'no-store',
             });
             const data = await response.json();
-            setQuote(data[0].q);
-            setAuthor(data[0].a);
+            setQuote(data.q);
+            setAuthor(data.a);
             // Generate a random wait time between 300ms (0.3s) and 1000ms (1s)
             const randomDelay = Math.random() * (1000 - 300) + 300;
             await new Promise(resolve => setTimeout(resolve, randomDelay));

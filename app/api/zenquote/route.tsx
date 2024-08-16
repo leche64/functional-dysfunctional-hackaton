@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function GET(req: Request) {
     try {
         console.log("getting new quote..", new Date().toLocaleString());
-        const apiUrl = "https://zenquotes.io/api/random";
+        const apiUrl = "https://zenquotes.io/api/quotes";
 
         const response = await fetch(apiUrl, {
             method: "GET",
@@ -20,12 +20,12 @@ export async function GET(req: Request) {
         }
 
         const data = await response.json();
-        const severResponse = NextResponse.json(data);
+        const randomObject = data[Math.floor(Math.random() * data.length)];
+        const severResponse = NextResponse.json(randomObject);
         severResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
         severResponse.headers.set('Pragma', 'no-cache');
         severResponse.headers.set('Expires', '0');
 
-        console.log(data[0].q);
         return severResponse;
     } catch (error) {
         return new Response("Internal Server Error", { status: 500 });

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, VT323 } from "next/font/google";
 import "./globals.css";
-import BouncingDVDLogo from "./components/DvD";
+
+// import BouncingDVDLogo from "./components/DvD";
+import dynamic from "next/dynamic";
+const BouncingDVDLogo = dynamic(() => import("./components/DvD"), { ssr: false });
 
 const inter = Inter({ subsets: ["latin"] });
 const fontVt323 = VT323({
