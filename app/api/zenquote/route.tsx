@@ -10,7 +10,7 @@ export async function GET(req: Request): Promise<Response> {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Cache-Control": "no-cache, no-store, must-revalidate, proxy-revalidate",
                 pragma: "no-cache",
                 expires: "0",
             },
