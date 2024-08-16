@@ -1,11 +1,11 @@
-## TLDR
+## Zen Click
+Life is though, too many distractions.. but zen is just one click away.. zen click helps you avoid distractions FAST with just ONE click..
+
 App that helps users achieve zen and less distractions by introducing a large number of.. distractions.. just click the button..
 
 ## Demo 
 [https://zen-click.vercel.app/](https://zen-click.vercel.app/) 
 
-## About 
-life is though, too many distractions.. but zen is just one click away.. zen click helps you avoid distractions FAST with just ONE click..
 
 ## Features
 - button moves away from users cursor 
