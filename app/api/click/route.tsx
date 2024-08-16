@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     const result = await turso.execute(
         'SELECT COUNT(*) FROM time_table'
     );
-    console.log('Count retrieved successfully', result);
+    console.log('Count retrieved successfully', result.rows[0][0]);
 
     const count = result.rows[0][0];
     
