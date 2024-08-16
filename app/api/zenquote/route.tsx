@@ -25,10 +25,10 @@ export async function GET(req: Request) {
         const randomObject = data[randomNum];
         console.log("random object", randomNum,randomObject);
         const severResponse = NextResponse.json(randomObject);
-        severResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        severResponse.headers.set('Pragma', 'no-cache');
-        severResponse.headers.set('Expires', '0');
-        severResponse.headers.set('Cache', 'no-store');
+        // severResponse.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        // severResponse.headers.set('Pragma', 'no-cache');
+        // severResponse.headers.set('Expires', '0');
+        // severResponse.headers.set('Cache', 'no-store');
 
         return severResponse;
     } catch (error) {
