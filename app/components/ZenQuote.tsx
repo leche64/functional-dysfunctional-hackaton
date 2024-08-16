@@ -13,7 +13,7 @@ const ZenQuote: React.FC = () => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache',
+                    cache: 'no-store',
                 },
             });
             const data = await response.json();
