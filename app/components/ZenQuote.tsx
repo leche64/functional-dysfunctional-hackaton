@@ -1,4 +1,5 @@
 "use client";
+import { unstable_noStore } from 'next/cache';
 import React, { useEffect, useState } from 'react';
 
 const ZenQuote: React.FC = () => {
@@ -8,6 +9,7 @@ const ZenQuote: React.FC = () => {
 
     useEffect(() => {
         const fetchQuote = async (): Promise<void> => {
+            unstable_noStore();
             setLoading(true);
             const response = await fetch('/api/zenquote', {
                 cache: 'no-store',

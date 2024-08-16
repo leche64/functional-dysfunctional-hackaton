@@ -1,4 +1,5 @@
 "use client"
+import { unstable_noStore } from 'next/cache';
 import React, { useEffect, useState } from 'react';
 
 const ZenCount: React.FC = () => {
@@ -6,6 +7,7 @@ const ZenCount: React.FC = () => {
     const [position, setPosition] = useState({ top: 0, right: 0 });
 
     useEffect(() => {
+        unstable_noStore();
         const fetchCount = async () => {
             const response = await fetch('/api/click', { cache: 'no-store' });
             const data = await response.json();
